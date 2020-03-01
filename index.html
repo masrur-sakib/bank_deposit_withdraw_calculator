@@ -23,20 +23,20 @@
             <div class="col-md-4">
                 <div class="deposit status">
                     <h3>Deposit</h3>
-                    <h2>$00</h2>
+                    <h2>$ <span id="current_deposit">00</span></h2>
                 </div>
                 
             </div>
             <div class="col-md-4">
                 <div class="withdraw status">
                     <h3>Withdraw</h3>
-                    <h2>$00</h2>
+                    <h2>$ <span id="current_withdraw">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="balance status">
                     <h3>Balance</h3>
-                    <h2>$00</h2>
+                    <h2>$ <span id="current_balance">1200</span></h2>
                 </div>
             </div>
         </div>
@@ -45,15 +45,15 @@
             <div class="col-md-6">
                 <div class="login_form">
                     <h4>Deposit</h4>
-                    <input type="text" class="form-control" placeholder="$ amount you want to deposit">
-                    <button class="btn btn-success">Deposit</button>
+                    <input id="deposit_amount" type="text" class="form-control" placeholder="$ amount you want to deposit">
+                    <button class="btn btn-success" id="deposit">Deposit</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="login_form">
                     <h4>Withdraw</h4>
-                    <input type="text" class="form-control" placeholder="$ amount you want to withdraw">
-                    <button class="btn btn-success">Withdraw</button>
+                    <input id="withdraw_amount" type="text" class="form-control" placeholder="$ amount you want to withdraw">
+                    <button class="btn btn-success" id="withdraw">Withdraw</button>
                 </div>
             </div>
         </div>
@@ -62,13 +62,78 @@
     
 
     <script>
+        // Login button action settings 
         const login_btn = document.getElementById("user_login");
         login_btn.addEventListener("click", function(){
             const loginArea = document.getElementById("login_area");
             loginArea.style.display = "none";
             const transactionArea = document.getElementById("transaction_area");
             transactionArea.style.display = "block";
-        })
+            }
+        )
+
+        // Deposit button action settings
+        const deposit_btn = document.getElementById("deposit");
+        deposit_btn.addEventListener("click", function(){
+            const depositAmount = document.getElementById("deposit_amount").value;
+            const depositAmountNumber = parseFloat(depositAmount);
+
+            // First Way (using function) -->
+
+            updateDepositInfo("current_deposit", depositAmountNumber);
+            updateDepositInfo("current_balance", depositAmountNumber);
+
+            // Second Way -->
+
+            // const presentDeposit = document.getElementById("current_deposit").innerText;
+            // const presentDepositNumber = parseFloat(presentDeposit);
+            // const totalDeposit = presentDepositNumber+depositAmountNumber;
+            // document.getElementById("current_deposit").innerText = totalDeposit;
+
+            // const currentBalance = document.getElementById("current_balance").innerText;
+            // const currentBalanceNumber = parseFloat(currentBalance);
+            // const totalBalance = currentBalanceNumber+depositAmountNumber;
+            // document.getElementById("current_balance").innerText = totalBalance;
+
+            document.getElementById("deposit_amount").value = "";
+
+            }
+        )
+        
+        function updateDepositInfo(number, depositAmountNumber){
+            const total = document.getElementById(number).innerText;
+            const totalNumber = parseFloat(total);
+            const totalFinal = totalNumber+depositAmountNumber;
+            document.getElementById(number).innerText = totalFinal;
+        }
+
+        // Withdraw button action settings
+
+        const withdraw_btn = document.getElementById("withdraw");
+        withdraw_btn.addEventListener("click", function(){
+            const withdrawAmount = document.getElementById("withdraw_amount").value;
+            const withdrawAmountNumber = parseFloat(withdrawAmount);
+
+            // First Way (using function) -->
+
+            updateWithdrawInfo("current_withdraw", withdrawAmountNumber);
+            updateWithdrawInfo("current_balance", withdrawAmountNumber);
+
+            document.getElementById("withdraw_amount").value = "";
+
+            }
+
+        )
+
+        function updateWithdrawInfo(number, withdrawAmountNumber){
+            const total = document.getElementById(number).innerText;
+            const totalNumber = parseFloat(total);
+            const totalFinal = totalNumber+withdrawAmountNumber;
+            const withdrawFinal = totalNumber-withdrawAmountNumber;
+            document.getElementById(number).innerText = totalFinal;
+            document.getElementById(withdrawAmountNumber).innerText = withdrawFinal;
+        }
+
     </script>
 
 </body>
