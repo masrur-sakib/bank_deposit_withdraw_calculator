@@ -80,8 +80,8 @@
 
             // First Way (using function) -->
 
-            updateDepositInfo("current_deposit", depositAmountNumber);
-            updateDepositInfo("current_balance", depositAmountNumber);
+            updateAccountInfo("current_deposit", depositAmountNumber);
+            updateAccountInfo("current_balance", depositAmountNumber);
 
             // Second Way -->
 
@@ -100,7 +100,7 @@
             }
         )
         
-        function updateDepositInfo(number, depositAmountNumber){
+        function updateAccountInfo(number, depositAmountNumber){
             const total = document.getElementById(number).innerText;
             const totalNumber = parseFloat(total);
             const totalFinal = totalNumber+depositAmountNumber;
@@ -116,23 +116,14 @@
 
             // First Way (using function) -->
 
-            updateWithdrawInfo("current_withdraw", withdrawAmountNumber);
-            updateWithdrawInfo("current_balance", withdrawAmountNumber);
+            updateAccountInfo("current_withdraw", withdrawAmountNumber);
+            updateAccountInfo("current_balance", -1*withdrawAmountNumber);
 
             document.getElementById("withdraw_amount").value = "";
 
             }
 
         )
-
-        function updateWithdrawInfo(number, withdrawAmountNumber){
-            const total = document.getElementById(number).innerText;
-            const totalNumber = parseFloat(total);
-            const totalFinal = totalNumber+withdrawAmountNumber;
-            const withdrawFinal = totalNumber-withdrawAmountNumber;
-            document.getElementById(number).innerText = totalFinal;
-            document.getElementById(withdrawAmountNumber).innerText = withdrawFinal;
-        }
 
     </script>
 
